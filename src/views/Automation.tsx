@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { Cpu, Play, Square, Settings, Sliders, MessageSquare, Heart, UserPlus, Eye, Clock, CheckCircle, Smartphone } from 'lucide-react';
+import { Cpu, Play, Square, Settings, Sliders, MessageSquare, Heart, UserPlus, Eye, Clock, CheckCircle, Smartphone, Sparkles, Users, RefreshCw } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface AutomationProps {
@@ -13,7 +13,23 @@ interface AutomationProps {
 
 export default function Automation({ onPostNewLog }: AutomationProps) {
   const [isRunning, setIsRunning] = useState(false);
-  const [selectedTab, setSelectedTab] = useState<'follow' | 'like' | 'comment' | 'dm' | 'story_view'>('follow');
+  const [selectedTab, setSelectedTab] = useState<'follow' | 'like' | 'comment' | 'dm' | 'story_view' | 'agentic'>('agentic');
+
+  // Agentic Autopilot states (Task 4.7 / Phase 16.1)
+  const [agenticMasterState, setAgenticMasterState] = useState(true);
+  const [agentConfidenceThreshold, setAgentConfidenceThreshold] = useState(85);
+  const [selectedAgentModel, setSelectedAgentModel] = useState('kimi-k2.6');
+  const [agentPersonality, setAgentPersonality] = useState<'professional' | 'friendly' | 'witty'>('friendly');
+  const [pendingApprovals, setPendingApprovals] = useState([
+    { id: 'app-1', type: 'Comment Reply', targetUser: '@gains_guru', context: 'Asked: "What are your subscription features?"', proposedReply: 'Hey! We offer residential proxies, automated Maverick sequence pipelines, and organic content calendars. Standard starts at $29/mo! 🌟', confidence: 92 },
+    { id: 'app-2', type: 'DM Lead Qualify', targetUser: '@fit_brand_xo', context: 'Sent: "Interested in collaboration. Do you support Shopify blog posting?"', proposedReply: 'Hello! Yes, our CRM + BlogCMS supports Shopify, dietmaven.ca, and active custom endpoints. Let\'s schedule a brief 10 min audit call! 📅', confidence: 81 },
+    { id: 'app-3', type: 'Group Share Adapt', targetUser: 'LinkedIn Group: Growth Hackers', context: 'Action: Share newly compiled blog post to 12 active channels', proposedReply: '🚀 Unleashing Maverick tactics in 2026! How automated micro-campaign lead filters can grow your conversion coefficients by 5.2x.', confidence: 88 }
+  ]);
+  const [agentDecisionsLog, setAgentDecisionsLog] = useState([
+    { id: 'dec-1', timestamp: '14:32:10', stage: 'Observe', desc: 'Detected high-intent comment mentioning "pricing" on post #SEO-202' },
+    { id: 'dec-2', timestamp: '14:32:11', stage: 'Think', desc: 'Confidence score calculated: 92/100, above approval threshold (85). Personality set to friendly.' },
+    { id: 'dec-3', timestamp: '14:32:12', stage: 'Act', desc: 'Dispatched automated contextual reply to comment and queued welcome DM' }
+  ]);
 
   // Input States
   const [hashtags, setHashtags] = useState('#fitness, #organic, #workout');
@@ -152,6 +168,7 @@ export default function Automation({ onPostNewLog }: AutomationProps) {
             <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest font-mono mb-2 px-1">Functional Triggers</p>
             <nav className="space-y-1">
               {[
+                { id: 'agentic', name: 'Agentic AI Autopilot 🤖', icon: Sparkles },
                 { id: 'follow', name: 'Auto Follow/Unfollow', icon: UserPlus },
                 { id: 'like', name: 'Auto Like Engagements', icon: Heart },
                 { id: 'comment', name: 'Comment Spintax', icon: MessageSquare },
@@ -184,6 +201,193 @@ export default function Automation({ onPostNewLog }: AutomationProps) {
         <div className="lg:col-span-3 space-y-6">
           <div className="p-6 rounded-xl border border-slate-800 bg-slate-900/20 space-y-6 text-left">
             
+            {/* OPTION 0: Agentic AI Autopilot configurations (Task 4.7 / Phase 16) */}
+            {selectedTab === 'agentic' && (
+              <div className="space-y-6" id="automation-tab-agentic">
+                <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+                  <div className="flex items-center space-x-2">
+                    <Sparkles className="h-5 w-5 text-indigo-400 animate-pulse" />
+                    <div>
+                      <h3 className="text-sm font-bold text-slate-100 uppercase tracking-widest font-mono">Agentic AI Autopilot Control Center</h3>
+                      <p className="text-[10px] text-slate-400">Autonomous observation, intent analysis, copy adaptation, and queue sharing.</p>
+                    </div>
+                  </div>
+                  
+                  <button
+                    onClick={() => {
+                      setAgenticMasterState(!agenticMasterState);
+                      toast.success(`Autonomous Autopilot set to ${!agenticMasterState ? 'ENABLED' : 'DISABLED'}`);
+                      onPostNewLog(`Agentic Autopilot Master Mode altered: ${!agenticMasterState}`, 'system', 'info');
+                    }}
+                    className={`px-3 py-1 rounded text-xs font-mono font-bold tracking-tight cursor-pointer border ${
+                      agenticMasterState 
+                        ? 'border-emerald-500/25 text-emerald-400 bg-emerald-500/5' 
+                        : 'border-slate-800 text-slate-500 bg-slate-900/30'
+                    }`}
+                  >
+                    {agenticMasterState ? '● AUTOPILOT ACTIVE' : '○ AUTOPILOT STANDBY'}
+                  </button>
+                </div>
+
+                {/* Grid model + threshold controls */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div className="p-3.5 rounded-lg border border-slate-850 bg-slate-950/40 space-y-1">
+                    <span className="text-[9px] font-bold text-slate-400 uppercase font-mono block">Reasoning Core Model</span>
+                    <select
+                      value={selectedAgentModel}
+                      onChange={(e) => {
+                        setSelectedAgentModel(e.target.value);
+                        toast.success(`Agent context router bound to ${e.target.value}`);
+                      }}
+                      className="w-full bg-slate-900 border border-slate-800 rounded p-1.5 text-xs text-slate-200"
+                    >
+                      <option value="kimi-k2.6">kimi-k2.6 (Auto)</option>
+                      <option value="nemotron-3-nano-omni-30b-a3b-reasoning">nemotron-3-nano-omni</option>
+                      <option value="llama-4-maverick-17b-128e-instruct">llama-4-maverick-17b</option>
+                      <option value="gemini-2.5-flash">gemini-2.5-flash-pro</option>
+                    </select>
+                  </div>
+
+                  <div className="p-3.5 rounded-lg border border-slate-850 bg-slate-950/40 space-y-1">
+                    <span className="text-[9px] font-bold text-slate-400 uppercase font-mono block">Personality Spectrum</span>
+                    <div className="flex space-x-1.5 pt-0.5">
+                      {(['professional', 'friendly', 'witty'] as const).map((p) => (
+                        <button
+                          key={p}
+                          onClick={() => {
+                            setAgentPersonality(p);
+                            toast.info(`Personality set to ${p.toUpperCase()}`);
+                          }}
+                          className={`flex-1 text-[9px] font-mono py-1 rounded border capitalize ${
+                            agentPersonality === p 
+                              ? 'border-indigo-500/30 text-indigo-400 bg-indigo-500/5 font-semibold' 
+                              : 'border-slate-800 text-slate-500 hover:text-slate-350'
+                          }`}
+                        >
+                          {p}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="p-3.5 rounded-lg border border-slate-850 bg-slate-950/40 space-y-1">
+                    <div className="flex justify-between items-center text-[9px] font-bold text-slate-400 uppercase font-mono">
+                      <span>Human Review Gate</span>
+                      <span className="text-amber-500 font-semibold font-mono">&lt; {agentConfidenceThreshold}%</span>
+                    </div>
+                    <input
+                      type="range"
+                      min={60}
+                      max={95}
+                      step={5}
+                      value={agentConfidenceThreshold}
+                      onChange={(e) => setAgentConfidenceThreshold(Number(e.target.value))}
+                      className="w-full h-1 bg-slate-850 rounded-lg appearance-none cursor-pointer accent-indigo-500 mt-2"
+                    />
+                  </div>
+                </div>
+
+                {/* Human-in-the-Loop review & Approval workflow queue */}
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between border-b border-slate-850 pb-1.5">
+                    <h4 className="text-xs font-bold text-amber-505 uppercase tracking-widest font-mono flex items-center space-x-1">
+                      <span>Pending Autopilot Actions Approved Index</span>
+                      <span className="px-1.5 py-0.2 rounded bg-amber-500/10 text-[9px] border border-amber-500/25 font-bold">{pendingApprovals.length} Enqueued</span>
+                    </h4>
+                    <span className="text-[10px] text-slate-500">Confidence below threshold triggers human review.</span>
+                  </div>
+
+                  {pendingApprovals.length === 0 ? (
+                    <div className="p-8 rounded-lg border border-dashed border-slate-850 text-center text-xs text-slate-500">
+                      No enqueued actions in human guard index. Autopilot satisfies all margin outputs perfectly!
+                    </div>
+                  ) : (
+                    <div className="space-y-3">
+                      {pendingApprovals.map((app) => (
+                        <div key={app.id} className="p-4 rounded-xl border border-slate-850 bg-slate-950/50 flex flex-col md:flex-row gap-4 items-start md:items-center justify-between transition-all hover:border-slate-800">
+                          <div className="space-y-1.5 text-xs flex-1 text-left">
+                            <div className="flex flex-wrap items-center gap-2">
+                              <span className="text-[10px] font-mono uppercase bg-indigo-500/10 text-indigo-400 px-1.5 py-0.2 rounded font-semibold border border-indigo-500/20">
+                                {app.type}
+                              </span>
+                              <span className="text-[10px] font-semibold text-slate-400 font-mono">{app.targetUser}</span>
+                              <span className={`text-[9px] font-mono px-1 rounded font-extrabold ${
+                                app.confidence >= agentConfidenceThreshold 
+                                  ? 'bg-emerald-500/10 text-emerald-400' 
+                                  : 'bg-amber-500/10 text-amber-500 animate-pulse'
+                              }`}>
+                                {app.confidence}% Confidence
+                              </span>
+                            </div>
+
+                            <p className="text-slate-450 italic font-medium">"{app.context}"</p>
+                            
+                            <div className="p-2.5 rounded bg-slate-900 border border-slate-850 font-sans text-slate-200 leading-relaxed text-[11px] relative mt-2">
+                              <span className="absolute -top-1.5 left-2 px-1 text-[8px] font-mono uppercase text-slate-500 bg-slate-900">Adapted Counsel Copy</span>
+                              "{app.proposedReply}"
+                            </div>
+                          </div>
+
+                          {/* Approval Actions bar */}
+                          <div className="flex items-center space-x-2 w-full md:w-auto flex-shrink-0 justify-end pt-2 md:pt-0">
+                            <button
+                              onClick={() => {
+                                setPendingApprovals(pendingApprovals.filter(p => p.id !== app.id));
+                                toast.error('Autonomous copy rejected and deleted');
+                                onPostNewLog(`Operator rejected proposed autonomous action: ${app.type} targetting ${app.targetUser}. Deleted.`, 'system', 'warning');
+                              }}
+                              className="px-2.5 py-1 rounded bg-slate-900 border border-slate-800 text-slate-400 hover:text-rose-450 hover:border-rose-500/35 text-[11px] font-mono transition-colors cursor-pointer"
+                              type="button"
+                            >
+                              Reject
+                            </button>
+
+                            <button
+                              onClick={() => {
+                                setPendingApprovals(pendingApprovals.filter(p => p.id !== app.id));
+                                toast.success('Autonomous action successfully executed & published!');
+                                onPostNewLog(`Autonomous Action Dispatched: Accepted and published ${app.type} to social index.`, 'system', 'success');
+                              }}
+                              className="px-3.5 py-1 rounded bg-indigo-600 text-slate-100 hover:bg-indigo-500 text-[11px] font-bold font-mono transition-all cursor-pointer"
+                              type="button"
+                            >
+                              Approve & Dispatch
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Observe Think Act visual loop state */}
+                <div className="p-4 rounded-xl border border-indigo-500/20 bg-indigo-500/5 space-y-3 text-xs">
+                  <h4 className="font-bold text-indigo-400 uppercase font-mono text-[10px] tracking-widest flex items-center space-x-1">
+                    <span>Active Decision State Engine (Observe - Think - Act)</span>
+                    <RefreshCw className="h-3 w-3 animate-spin text-indigo-400" />
+                  </h4>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    {['Observe', 'Think', 'Act'].map((stage, i) => {
+                      const latestStep = agentDecisionsLog.find(lg => lg.stage === stage);
+                      return (
+                        <div key={stage} className="p-3 rounded-lg border border-slate-850 bg-slate-950/40 text-left space-y-1">
+                          <div className="flex justify-between items-center text-[10px] uppercase font-mono font-bold text-slate-450">
+                            <span>Step 0{i+1}: {stage}</span>
+                            <span className="text-slate-600 font-normal">{latestStep?.timestamp}</span>
+                          </div>
+                          <p className="font-semibold text-slate-300 leading-relaxed text-[11px]">
+                            {latestStep ? latestStep.desc : 'Readying sensory buffer logs...'}
+                          </p>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+              </div>
+            )}
+
             {/* OPTION 1: Follow configurations */}
             {selectedTab === 'follow' && (
               <div className="space-y-4" id="automation-tab-follow">
