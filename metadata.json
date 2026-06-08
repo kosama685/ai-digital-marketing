@@ -1,0 +1,6 @@
+{
+  "name": "NexusForge AI",
+  "description": "An all-in-one automated social media, content CMS, SEO, campaign intelligence, and proxy calibration dashboard.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
