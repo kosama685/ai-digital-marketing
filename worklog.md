@@ -37,6 +37,16 @@
 * A multi-step onboarding wizard for seamless social accounts binding.
 * Ramps, warm-up schedules, session checkers, and simulated authentication challenges.
 
+### **👥 CRM & Sales Pipeline (Task 9.1, 9.2, 9.3)**
+* **Interactive Kanban Pipeline:** Drag contacts through Deal phases (Lead, Qualified, Proposal, Won, Lost) with real-time probability-weighted estimations.
+* **Contacts & Leads Directory:** Real-time search tools, filtration of marketing acquisition pathways (e.g., Instagram, LinkedIn organic checks), and live Lead Scoring gauges.
+* **SKU Pricing Integrations:** Instant MSRP registration modal to update conversion parameters dynamically.
+
+### **🤝 Influencer Network Discovery (Phase 14)**
+* **Follower Authenticity Audit:** Conduct fake-follower verification analysis displaying zero-fraud authenticity meters.
+* **Campaign Brief Generator:** Input objective benchmarks, select hashtags constraints, configure payment terms, and dispatch briefs dynamically.
+* **Onboarding pipeline:** Shortlist, evaluate costs, and monitor contract stages per influencer.
+
 ### **🎨 Blog/CMS Manager & Daily 2 Posts Pilot**
 * **Daily 2 Posts SEO Pilot:** Fully automated generation wrapper. Resolves thematic keyword researches and competitive gaps. Auto-generates two complete unique articles each day.
 * **Duplicate Similarity Checks:** Simulates automated similarity calculations (guaranteeing under 15% overlap) to fully prevent algorithmic shadow-bans, complete with interactive review, manual schedule updates, and cross-platform publishing directly into the Content Scheduler.
@@ -45,6 +55,10 @@
 ### **🌐 Social Hub Integration**
 * Fully interactive OAuth credential binding mocks with Facebook, Instagram, LinkedIn, and Pinterest.
 * Supports cross-platform unified publishing adapters. Adjusts and optimizes media ratios per platform (e.g. 1:1 IG story, 16:9 LinkedIn boards) and generates preview card nodes dynamically.
+
+### **🎬 AI Studio Workspace (Phase 16)**
+* **Model Playground Selector:** Search and switch between flagship high-speed reasoning frameworks (e.g., NVIDIA Nemotron, Llama 4, Moonshot Kimi).
+* **Text / Image / Sound synthesizers:** Generate marketing content copywriting, latent diffuse photorealistic visual creatives, and synthesize ZeroShot TTS vocal waves.
 
 ### **🔍 SEO/AEO/GEO Audits**
 * Built a comprehensive site-analyzer verifying Technical crawl states, Mobile compatibility, and Core Web Vitals. Users can run full audit reports and auto-fix parameters which live-updates site scores dynamically.
@@ -58,10 +72,14 @@
 * Built segmentation rules filtering subscribers on tags, purchase amounts, and region parameters.
 * Drag-and-drop campaign sequence cards with custom delay countdown triggers.
 
-### **💼 Campaigns, Competitors, and Escalations**
+### **🚨 Escalation & Helpdesk (Phase 18.3)**
+* **SLA Resolution desks:** Tracks SLA indicators, issues source (system diagnostics, user reports), and maps tickets per priority card.
+* **Interactive Comments Timber:** Fully-fledged dialogue log per critical alert to record technical troubleshooting.
+
+### **💼 Campaigns, Competitors, and Client Workspaces**
 * **Campaign Kanban:** Fully interactive Kanban layout matching lifecycle states (Idea, Planning, Active, Completed). Tracks budget burn rates and displays interactive CPA performance calculations.
 * **Competitor Intelligence & SWOT:** Tracks follower demographics and engagement rates. Allows users to live-generate AI-powered SWOT assessments.
-* **Escalations Kanban:** A support kanban enqueuing priority alerts with live thread discussions and assignee fields.
+* **Client Workspaces (Phase 15):** Portfolio list map for 100+ active projects, profit margins evaluation indicators, and invoice generators.
 
 ---
 

@@ -29,6 +29,11 @@ import Competitors from './views/Competitors';
 import ProductsVisitors from './views/ProductsVisitors';
 import Proxies from './views/Proxies';
 import Admin from './views/Admin';
+import CRM from './views/CRM';
+import Influencers from './views/Influencers';
+import Agency from './views/Agency';
+import AIStudio from './views/AIStudio';
+import Escalations from './views/Escalations';
 
 import { Toaster, toast } from 'sonner';
 
@@ -201,6 +206,16 @@ export default function App() {
         return <ProductsVisitors />;
       case 'proxies':
         return <Proxies onPostNewLog={handlePostNewLog} />;
+      case 'crm':
+        return <CRM />;
+      case 'influencers':
+        return <Influencers />;
+      case 'agency':
+        return <Agency />;
+      case 'aistudio':
+        return <AIStudio />;
+      case 'escalations':
+        return <Escalations />;
       case 'adminpanel':
         if (session?.role !== 'admin') {
           return (

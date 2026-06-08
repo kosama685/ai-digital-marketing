@@ -23,7 +23,8 @@ import {
   ChevronLeft, 
   ChevronRight,
   BookOpen,
-  ActivitySquare
+  ActivitySquare,
+  Users
 } from 'lucide-react';
 import { motion } from 'motion/react';
 
@@ -50,15 +51,17 @@ export default function Sidebar({ session, activeSection, onNavigate }: SidebarP
       title: 'Growth & Planning',
       items: [
         { id: 'targeting', name: 'Targeting & Scraper', icon: Target },
-        { id: 'scheduler', name: 'Unified Calendar', icon: Calendar }
+        { id: 'scheduler', name: 'Unified Calendar', icon: Calendar },
+        { id: 'socialhub', name: 'Social Platform Hub', icon: Share2 },
+        { id: 'influencers', name: 'Influencer Network', icon: Users }
       ]
     },
     {
       title: 'CMS & Organic SEO',
       items: [
         { id: 'blogcms', name: 'Blog CMS AI Pilot', icon: FileEdit },
-        { id: 'socialhub', name: 'Social Platform Hub', icon: Share2 },
-        { id: 'seoaeogeo', name: 'SEO/AEO Site Analyzer', icon: SearchCode }
+        { id: 'seoaeogeo', name: 'SEO/AEO Site Analyzer', icon: SearchCode },
+        { id: 'aistudio', name: 'AI Workspace Studio', icon: ActivitySquare }
       ]
     },
     {
@@ -70,10 +73,18 @@ export default function Sidebar({ session, activeSection, onNavigate }: SidebarP
       ]
     },
     {
+      title: 'Sales & Client CRM',
+      items: [
+        { id: 'crm', name: 'CRM & Contacts', icon: Contact },
+        { id: 'escalations', name: 'Escalation Tickets', icon: ShieldAlert }
+      ]
+    },
+    {
       title: 'Infrastructure',
       items: [
         { id: 'productsvisitors', name: 'Products & Visitors', icon: Package },
-        { id: 'proxies', name: 'Proxy & Latencies', icon: Globe }
+        { id: 'proxies', name: 'Proxy & Latencies', icon: Globe },
+        { id: 'agency', name: 'Client Workspaces', icon: BookOpen }
       ]
     }
   ];
